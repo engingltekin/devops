@@ -104,7 +104,8 @@ resource "aws_autoscaling_group" "rASG" {
     id      = aws_launch_template.PhoneBookLT.id
     version = "$Latest"
   }
-  availability_zones        = ["us-east-1a", "us-east-1b"]
+  availability_zones        = [data.aws_availability_zones.defaultAZs]
+  vpc_zone_identifier = [ aws_lb.rLoadBalancer.subnets ]
   desired_capacity          = 2
   health_check_grace_period = 300
   health_check_type         = "ELB"
@@ -118,7 +119,7 @@ resource "aws_lb" "rLoadBalancer" {
   internal                   = false
   load_balancer_type         = "application"
   security_groups            = ["${aws_security_group.ALBSG.id}"]
-  subnets                    = ["subnet-01ef9c1e051ff7c0d", "subnet-0a462ca1e9f0dd616", "subnet-08bd3c2c43a67d93b"]
+  subnets                    = [data.aws_subnets.defaultsubnets.ids]
   enable_deletion_protection = false
 
   tags = {

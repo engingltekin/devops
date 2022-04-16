@@ -17,6 +17,20 @@ data "aws_ami" "tf_ami" {
   }
 }
 
+data "aws_subnets" "defaultsubnets" {
+  filter {
+    name = vpc_id
+    values = [ data.aws_vpc.main_vpc.id ]
+  }
+}
+
+data "aws_availability_zones" "defaultAZs" {
+  filter {
+    name = vpc_id
+    values = [ data.aws_vpc.main_vpc.id ]
+  }
+}
+
 # data "aws_subnet" "defaultsubnets" {
 #   vpc_id = "vpc-065740f91024a5ae2"
 
