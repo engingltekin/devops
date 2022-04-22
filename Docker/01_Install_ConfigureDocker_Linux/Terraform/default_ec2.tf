@@ -1,5 +1,5 @@
 data "aws_vpc" "main_vpc" {
-  id = "vpc-065740f91024a5ae2"
+  default = true
 }
 
 data "aws_ami" "tf_ami" {
