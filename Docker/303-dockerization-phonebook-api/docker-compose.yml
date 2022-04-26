@@ -14,7 +14,7 @@ services:
         build: .
         restart: always
         depends_on:
-            - database
+            - mysql
         ports:
             - "80:80"
         networks:
