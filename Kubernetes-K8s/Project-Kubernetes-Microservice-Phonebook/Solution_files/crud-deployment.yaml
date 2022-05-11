@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crud-deployment
+  labels:
+    name: crud-ops
+    app: phonebook-crud
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: crud-ops
+      app: phonebook-crud
+  template:
+    metadata:
+      labels:
+        name: crud-ops
+        app: phonebook-crud
+    spec:
+      containers: 
+        - image: engingltekin/phonebook-flask-app_result
+          imagePullPolicy: Always
+          name: myweb
+          ports: 
+            - containerPort: 80
+          env:
+            - name: MYSQL_DATABASE_HOST
+              valueFrom: 
+                configMapKeyRef:
+                  name: mysql-configmap
+                  key: mysql-host
+            - name: MYSQL_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-password   
+            - name: MYSQL_DATABASE
+              valueFrom: 
+                configMapKeyRef:
+                  name: mysql-configmap
+                  key: mysql-database
+            - name: MYSQL_USER
+              valueFrom: 
+                configMapKeyRef:
+                  name: mysql-configmap
+                  key: mysql-username                                                   
+
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: 100m
+            requests:
+              memory: 250Mi
+              cpu: 80m	

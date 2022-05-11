@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+data:
+  mysql-username: clarusway
+  mysql-database: phonebook_clarusway
+  mysql-host: mysql-service
