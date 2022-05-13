@@ -33,7 +33,7 @@ spec:
         - name: MYSQL_USER
           valueFrom: 
             configMapKeyRef:
-              name: mysql-configmap
+              name: mysql-secret
               key: mysql-username
         - name: MYSQL_DATABASE
           valueFrom: 

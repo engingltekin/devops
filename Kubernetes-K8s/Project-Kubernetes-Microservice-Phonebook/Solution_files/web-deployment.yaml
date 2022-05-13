@@ -18,7 +18,7 @@ spec:
         app: phonebook-web
     spec:
       containers: 
-        - image: engingltekin/phonebook-flask-app_web
+        - image: engingltekin/phonebook-flask-app_web:1.0
           imagePullPolicy: Always
           name: myweb
           ports: 
@@ -42,7 +42,7 @@ spec:
             - name: MYSQL_USER
               valueFrom: 
                 configMapKeyRef:
-                  name: mysql-configmap
+                  name: mysql-secret
                   key: mysql-username                                                   
 
           resources:

@@ -3,6 +3,5 @@ kind: ConfigMap
 metadata:
   name: mysql-configmap
 data:
-  mysql-username: clarusway
-  mysql-database: phonebook_clarusway
+  mysql-database: phonebook # 
   mysql-host: mysql-service
