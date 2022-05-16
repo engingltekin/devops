@@ -11,4 +11,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/home/ubuntu/mnt/data"
+    path: "/mnt/data"
