@@ -77,3 +77,51 @@ ansible-config view
 - import_playbook: shell.yml
 - import_playbook: configure.yml
 ```
+
+# variables
+
+# variables must be used with quotes
+
+
+Example: remote_install_path: path # simple variable
+Reference: "{{ remote_install_path }}"
+
+region: # Example list
+    - northeast
+    - southeast
+
+List Reference {{ region[0] }}
+
+# Dictionary
+
+foo:
+  field1: one
+  field2: two
+
+Reference
+ foo[field1]
+ foo.field1
+
+ # registers keyword
+
+ You can capture output of an ansible task and put it in register  
+
+
+
+ 
+ 
+
+
+# plugins
+
+# roles
+
+# using roles on play level
+
+---
+- hosts: webservers
+  roles:
+    - common
+    - webservers
+ 
+    

@@ -1,0 +1,26 @@
+- name: Common Configuration
+  hosts: aws_ec2
+  become: true
+  tasks:
+    - name: update all packages
+      command: yum update -y
+    - name: install the latest version Docker
+      command: amazon-linux-extras install docker -y
+    - name: start docker
+      become: yes
+      command: systemctl start docker
+    - name: start docker
+      become: yes
+      command: systemctl enable docker
+    - name: add ec2-user to docker group
+      user: #user module
+        name: ec2-user
+        groups: docker
+        append: yes 
+        notify: restart docker service
+handlers: 
+  - name: restart docker service
+      systemd:
+        name: docker
+        enabled: yes
+        state: restarted             
