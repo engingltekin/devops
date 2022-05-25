@@ -1,3 +1,4 @@
+# Docker is needed for all managed nodes so could have a common file instead rewriting!!!
 - name: configure nodejs
   hosts: aws_ec2
   become: yes

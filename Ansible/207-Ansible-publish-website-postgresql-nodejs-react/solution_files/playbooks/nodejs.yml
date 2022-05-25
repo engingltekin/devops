@@ -1,6 +1,7 @@
 - name: configure nodejs
   hosts: _ansible_nodejs
   become: yes
+  # update packages and install and start docker
   tasks: 
     - name: update packages
       yum: #yum module
@@ -55,6 +56,37 @@
         name: docker
         enabled: yes
         state: started
+ # create a folder directory and copy both dockerfile and source files to build image       
+ # Below steps are needed if docker image will be build in managed node!!!!
+  
+#  - name: create build directory
+#       file:
+#         path: /home/ec2-user/nodejs
+#         state: directory
+#         owner: root
+#         group: root
+#         mode: "0755"
+
+#     - name: copy files to nodejs node
+#       copy: 
+#         src: /home/ec2-user/todo-app-pern/server/
+#         dest: /home/ec2-user/nodejs
+
+#     - name: copy the dockerfile
+#       copy: 
+#         src: /home/ec2-user/ansible-project/nodejs/Dockerfile # Dockerfile path
+#         dest: /home/ec2-user/nodejs
+
+#     - name: remove container and image if exist
+#       shell: "docker ps -q --filter 'name=engin_nodejs' && docker stop engin_nodejs && docker rm -fv engin_nodejs && docker image rm -f engingltekin/todo-app-pern-js || echo 'Not Found'"
+
+#     - name: build container image
+#       docker_image:
+#         name: engingltekin/todo-app-pern-js
+#         build:
+#           path: /home/ec2-user/nodejs
+#         source: build
+#         state: present
 
     - name: Pull docker image 
       shell: docker pull engingltekin/todo-app-pern-js:latest
